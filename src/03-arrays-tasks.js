@@ -471,23 +471,28 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const res = [];
+  // eslint-disable-next-line no-plusplus
+  for (let i = start; i <= end; i++) {
+    res.push(i);
+  }
+  return res;
 }
 
 /**
  * Returns array containing only unique values from the specified array.
  *
  * @param {array} arr
- * @return {array}
+ * @return {any[]}
  *
  * @example
  *   [ 1, 2, 3, 3, 2, 1 ] => [ 1, 2, 3 ]
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return Array.from(new Set(arr));
 }
 
 /**
