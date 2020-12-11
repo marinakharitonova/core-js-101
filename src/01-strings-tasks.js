@@ -202,8 +202,11 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const top = `┌${'─'.repeat(width - 2)}┐\n`;
+  const inner = `${(`│${' '.repeat(width - 2)}│\n`).repeat(height - 2)}`;
+  const bottom = `└${'─'.repeat(width - 2)}┘\n`;
+  return top + inner + bottom;
 }
 
 
@@ -223,8 +226,25 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const arrUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z'];
+  const arr = arrUpper.map((elem) => elem.toLowerCase());
+
+  let res = '';
+  // eslint-disable-next-line no-restricted-syntax
+  for (const char of str) {
+    if (arr.indexOf(char) !== -1) {
+      const index = arr.indexOf(char);
+      res += index + 13 > 25 ? arr[index + 13 - 26] : arr[index + 13];
+    } else if (arrUpper.indexOf(char) !== -1) {
+      const index = arrUpper.indexOf(char);
+      res += index + 13 > 25 ? arrUpper[index + 13 - 26] : arrUpper[index + 13];
+    } else {
+      res += char;
+    }
+  }
+  return res;
 }
 
 /**
@@ -271,8 +291,15 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = [
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
+  ];
+
+  return cards.indexOf(value);
 }
 
 
